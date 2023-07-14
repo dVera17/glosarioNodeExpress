@@ -1,6 +1,7 @@
 # Glosario de Node.js - Resumen de Documentación
 
 Este es un breve glosario que resume algunos conceptos clave de la documentación de Node.js.
+El glosario se encuentra dentro del archivo `app.js`
 
 ## Node.js
 
