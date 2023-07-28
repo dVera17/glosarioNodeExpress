@@ -440,4 +440,130 @@
         de las correcciones de errores y las nuevas funcionalidades.
 
         *?Publicar tus propios paquetes:
+        Puedes utilizar NPM para actualizar fácilmente los paquetes
+        instalados en tu proyecto a versiones más recientes, lo que te permite beneficiarte
+        de las correcciones de errores y las nuevas funcionalidades.
+
+        NPM se instala automáticamente junto con Node.js, por lo que no es necesario
+        realizar ninguna instalación adicional. Una vez que tienes Node.js instalado,
+        puedes utilizar el comando "npm" en la línea de comandos para ejecutar todas las
+        operaciones relacionadas con NPM
+
+        Para este ejemplo, vamos a instalar el archivo package.json para poder utilizar los
+        módulos de ES, Comando
+        *? “npm init -y”
+
+        *!1.7.2.1. ES Modules
+        ES Modules, también conocidos como ECMAScript Modules o ES6 Modules, son
+        una forma estándar de organizar y compartir código en JavaScript, introducida en
+        el estándar ECMAScript 2015 (ES6). A diferencia de CommonJS, que es más
+        común en entornos de servidor como Node.js, los módulos ES son una
+        especificación oficial del lenguaje JavaScript y están diseñados para funcionar
+        tanto en navegadores web como en entornos de servidor
+
+        *?Las características principales de los módulos ES son:
+
+        *?Asíncrono y basado en promesas: 
+        A diferencia del sistema de módulos
+        CommonJS, los módulos ES se cargan de forma asíncrona, lo que significa que se
+        pueden cargar y evaluar de manera no bloqueante. Esto permite que el programa
+        principal continúe su ejecución mientras los módulos se cargan en segundo plano. 
+        La carga de módulos ES se basa en promesas, lo que facilita el manejo de
+        dependencias y la carga condicional de módulos.
+
+        *?Sintaxis import/export:
+        Los módulos ES utilizan una sintaxis específica para
+        importar y exportar funcionalidades entre módulos. Para exportar, se utiliza la
+        palabra clave export seguida de la declaración, variable o función que se desea
+        exportar. Para importar, se utiliza la palabra clave import seguida del nombre y
+        ubicación del módulo, y se puede especificar qué funcionalidades se desean
+        importar utilizando la sintaxis de desestructuración.
+
+        *!1.8.Que es Nodemon
+        Nodemon es una herramienta de desarrollo para aplicaciones Node.js que facilita
+        la tarea de reiniciar automáticamente la aplicación cuando se detectan cambios en
+        los archivos del proyecto. En lugar de tener que reiniciar manualmente la
+        aplicación cada vez que se realizan cambios en el código, Nodemon lo hace de
+        forma automática, lo que agiliza el proceso de desarrollo y mejora la productividad.
+
+        Cuando se ejecuta una aplicación con Nodemon, este monitorea los archivos del
+        proyecto en busca de cambios. Si se detecta algún cambio en un archivo,
+        Nodemon reinicia automáticamente la aplicación, lo que significa que los cambios
+        realizados en el código se reflejan de inmediato sin tener que detener y reiniciar
+        manualmente la ejecución de la aplicación.
+
+        Nodemon también proporciona opciones adicionales, como la capacidad de
+        especificar qué archivos se deben monitorear y reiniciar, ignorar ciertos archivos o
+        directorios, y ejecutar scripts personalizados antes o después de cada reinicio de
+        la aplicación.
+
+        *?1.8.1. características
+
+        *?Reinicio automático
+        Nodemon monitorea los archivos del proyecto en busca de
+        cambios y reinicia automáticamente la aplicación cuando se detecta un cambio.
+        Esto evita tener que reiniciar manualmente la aplicación cada vez que se realicen
+        modificaciones en el código
+
+        *?Soporte amplio
+        Nodemon es compatible con una amplia variedad de proyectos y
+        frameworks basados en Node.js. Puede utilizarse en proyectos simples, así como
+        en aplicaciones más complejas y basadas en frameworks como Express, Koa,
+        Hapi, entre otros.
+
+        *?Detalles de reinicio controlados
+        Nodemon permite controlar los detalles del
+        reinicio automático de la aplicación. Puedes especificar qué archivos o directorios
+        deben ser monitoreados y reiniciados, y también puedes excluir archivos o
+        directorios específicos del monitoreo.
+
+        *?Integración con scripts personalizados
+        Nodemon proporciona la capacidad de
+        ejecutar scripts personalizados antes o después de cada reinicio de la aplicación.
+        Esto permite realizar tareas adicionales, como limpiar la caché, ejecutar pruebas
+        automatizadas o ejecutar comandos de compilación, para que se realicen
+        automáticamente en cada reinicio.
+
+        *?Modo silencioso
+        Nodemon tiene un modo silencioso que reduce la cantidad de
+        información de registro que se muestra en la consola. Esto puede ser útil para
+        mantener un flujo de trabajo limpio y sin distracciones durante el desarrollo.
+
+        *?Configuración flexible
+        Nodemon proporciona opciones de configuración flexibles
+        que permiten ajustar su comportamiento según las necesidades del proyecto.
+        Puedes especificar opciones como la extensión de archivos a monitorear, el
+        tiempo de espera antes de reiniciar, la exclusión de archivos o directorios, y más.
+
+        *?Amplia comunidad y soporte activo
+        Nodemon tiene una comunidad activa de
+        desarrolladores y una amplia base de usuarios. Esto significa que hay una gran
+        cantidad de recursos y soporte disponibles en línea, lo que facilita obtener ayuda y
+        encontrar soluciones a problemas comunes.
+
+        *!1.8.3. REQUEST HTTP en Node
+        En Node.js, el objeto request (solicitud) es un objeto proporcionado por el módulo
+        http o https que representa la solicitud HTTP recibida por el servidor. Proporciona
+        información sobre la solicitud realizada por el cliente, como la URL, los
+        encabezados, los parámetros de consulta y el cuerpo de la solicitud.
+
+        El objeto request se pasa como argumento a la función de controlador de solicitud
+        cuando se maneja una solicitud HTTP en el servidor. A través de este objeto,
+        puedes acceder a los detalles de la solicitud y tomar decisiones basadas en ellos.
+
+        Algunas propiedades y métodos comunes disponibles en el objeto request son:
+
+        *?request.url
+        La URL de la solicitud.
+        *?request.method
+        El método HTTP utilizado en la solicitud (GET, POST, etc.).
+        *?request.headers
+        Un objeto que contiene los encabezados de la solicitud
+        *?request.params
+        Los parámetros de ruta si estás utilizando un enrutador.
+        *?request.query
+        Los parámetros de consulta si están presentes en la URL.
+        *?request.body
+        El cuerpo de la solicitud (datos enviados en una solicitud POST o PUT).
+        
  */
