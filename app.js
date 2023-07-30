@@ -565,5 +565,581 @@
         Los parámetros de consulta si están presentes en la URL.
         *?request.body
         El cuerpo de la solicitud (datos enviados en una solicitud POST o PUT).
+
+        Puedes utilizar estas propiedades y métodos para acceder a la información de la
+        solicitud y realizar acciones correspondientes en tu servidor Node.js. Por ejemplo,
+        puedes verificar la ruta solicitada, los encabezados de autenticación, los datos
+        enviados en el cuerpo de la solicitud, etc.
+
+        *!1.8.4. Obtener los datos
+
+        Cuando se recibe una solicitud HTTP en un servidor Node.js, los datos de la
+        solicitud se envían en forma de fragmentos (chunks) en lugar de enviarse en su
+        totalidad.
+
+        1. En primer lugar, se importan dos módulos: createServer del módulo http y
+        fs para el manejo de archivos en el sistema de archivos.
+
+        2. Luego, se utiliza la función createServer para crear un servidor HTTP. Esta
+        función toma como argumento una función de devolución de llamada que
+        se ejecutará cada vez que se reciba una solicitud HTTP. La función de
+        devolución de llamada tiene dos parámetros: req para la solicitud y res para
+        la respuesta.
+
+        3. Dentro de la función de devolución de llamada, se declara una variable
+        llamada data e inicialmente se le asigna una cadena vacía. Esta variable se
+        utilizará para almacenar los datos recibidos en la solicitud.
+
+        4. A continuación, se utiliza el método req.on() para escuchar el evento
+        "data" de la solicitud. Cada vez que se recibe un fragmento de datos, la
+        función de devolución de llamada se ejecuta y el fragmento se concatena a
+        la variable data.
+
+        5. Después, se utiliza el método req.on() para escuchar el evento "end" de la
+        solicitud. Este evento se activa cuando se han recibido todos los datos de la
+        solicitud. Dentro de la función de devolución de llamada, se muestra en la
+        consola el contenido de data, se escribe data en la respuesta, se guarda
+        data en un archivo llamado "data.txt" utilizando fs.writeFile(), y finalmente
+        se envía la respuesta.
+
+        6.  A continuación, se define un objeto config que especifica la dirección IP del
+        servidor (hostname) y el puerto en el que se escucharán las solicitudes
+        (port).
+
+        7. Finalmente, se llama al método listen() en el servidor HTTP creado,
+        pasando el objeto config y una función de devolución de llamada. La
+        función de devolución de llamada simplemente muestra en la consola la
+        URL del servidor.
+
+            
+        *!2. Node JS Intermedio
+
+        *!2.1 Que es express
+
+        Express es un popular framework de aplicaciones web para Node.js. Proporciona
+        una capa adicional de abstracción sobre el módulo http incorporado de Node.js, lo
+        que facilita la creación de aplicaciones web y APIs de manera más eficiente y con
+        menos código.
+
+        Express ofrece una serie de características y utilidades que simplifican el
+        enrutamiento de URL, el manejo de solicitudes y respuestas, el renderizado de
+        vistas, el manejo de errores, la gestión de sesiones y cookies, entre otros aspectos
+        comunes en el desarrollo web. https://expressjs.com/es/4x/api.html#express
+
+        *!2.1.1. Características
+
+        Enrutamiento: Express proporciona un enrutador flexible que permite definir rutas
+        y manejar las solicitudes HTTP correspondientes. Esto permite establecer la lógica
+        de controladores para diferentes rutas y métodos HTTP.
+
+        Middleware: Express utiliza un modelo de middleware, donde se pueden agregar
+        funciones intermediarias (middleware) a la cadena de procesamiento de
+        solicitudes. Esto permite realizar acciones como autenticación, compresión,
+        registro y manipulación de solicitudes y respuestas antes de que lleguen a su
+        controlador final.
+
+        Gestión de vistas: Express facilita el renderizado de vistas HTML utilizando
+        cualquier motor de plantillas (como EJS, Pug o Handlebars) para generar
+        contenido dinámico y enviarlo al cliente.
+
+        Integración con servicios y recursos externos: Express proporciona una forma
+        sencilla de interactuar con servicios y recursos externos, como bases de datos,
+        servicios de almacenamiento en la nube y APIs de terceros, a través de bibliotecas
+        y módulos adicionales
+
+        Amplia comunidad y ecosistema: Express es uno de los frameworks más
+        populares y ampliamente adoptados en la comunidad de Node.js. Como resultado,
+        cuenta con una gran cantidad de recursos, módulos y complementos
+        desarrollados por la comunidad que extienden aún más su funcionalidad.
         
+        *!2.1.3. Obtener parámetros y encabezados
+
+        - params : En Express, los params se refieren a los parámetros enviados a
+        través del enrutador en una solicitud HTTP. Los parámetros son partes
+        variables de la URL que permiten capturar valores específicos y utilizarlos
+        en la lógica de la aplicación.
+
+        En Express, los parámetros se definen en la ruta utilizando dos puntos (:)
+        seguidos de un nombre de variable. Por ejemplo, en la ruta
+        /campus/:idCamper, idCamper es un parámetro que puede tomar
+        diferentes valores en cada solicitud.
+
+        Cuando se recibe una solicitud que coincide con una ruta que contiene
+        parámetros, Express extrae los valores de los parámetros y los hace
+        accesibles a través del objeto req.params. req.params es un objeto que
+        contiene pares clave-valor, donde la clave es el nombre del parámetro
+        definido en la ruta y el valor es el valor real que se captura de la URL.
+
+        - headers: En Express, los "headers" (encabezados) se refieren a la
+        información adicional que se envía junto con una solicitud HTTP o una
+        respuesta HTTP. Los encabezados proporcionan metadatos sobre la
+        solicitud o respuesta, como el tipo de contenido, la codificación, las cookies,
+        la autenticación y otros detalles importantes.
+
+        En Express, los encabezados se pueden acceder y manipular utilizando el
+        objeto req.headers para las solicitudes entrantes y el objeto res.set() o
+        res.setHeader() para las respuestas salientes.
+
+        Cuando se recibe una solicitud HTTP en Express, los encabezados
+        enviados por el cliente se almacenan en el objeto req.headers. Puedes
+        acceder a ellos para obtener información específica o tomar decisiones en
+        función de los valores de los encabezados.
+
+        Por ejemplo, para acceder al encabezado Content-Type de una solicitud
+        entrante, puedes utilizar req.headers['content-type'].
+        Para establecer encabezados en una respuesta saliente, puedes utilizar el
+        método res.set() o res.setHeader(). Estos métodos permiten establecer
+        encabezados personalizados o modificar los encabezados existentes antes
+        de enviar la respuesta al cliente.
+
+        *!2.1.4. Middleware
+
+        En Node.js, los middlewares son funciones o conjuntos de funciones que se
+        utilizan para procesar las solicitudes HTTP o las respuestas antes de que lleguen
+        a su destino final. Actúan como intermediarios entre el cliente y el servidor, y se
+        ejecutan secuencialmente en el orden en que se definen.
+
+        Los middlewares pueden realizar diversas tareas, como modificar los objetos de
+        solicitud y respuesta, realizar validaciones, autenticar usuarios, administrar
+        sesiones, registrar información de registro, comprimir o cifrar datos, entre otros.
+
+        *!2.1.5. Router
+
+        En Express, un router es una forma de organizar y gestionar las rutas de una
+        aplicación web de manera modular. Los routers permiten agrupar rutas
+        relacionadas y sus respectivos controladores en un lugar específico.
+
+        Un router en Express es un objeto que proporciona métodos para definir rutas y
+        gestionar las solicitudes HTTP asociadas a esas rutas. Puedes utilizar varios
+        routers en una aplicación Express para dividir y organizar las rutas en diferentes
+        módulos o archivos.
+
+        Al utilizar routers, puedes mejorar la estructura y la legibilidad de tu código, así
+        como facilitar el mantenimiento y la escalabilidad de tu aplicación. Los routers te
+        permiten definir rutas relacionadas en un archivo separado y luego montar ese
+        router en una ruta específica en tu aplicación principal.
+
+        *?1. Importación del paquete express:
+        Se importa el paquete express para utilizar sus funcionalidades, incluido el
+        enrutador.
+
+        *?2. Declaración del enrutador:
+        Se crea un enrutador utilizando express.Router(), y se guarda en la
+        variable appCamper. Este enrutador será responsable de gestionar las
+        rutas relacionadas a "campers".
+
+        *?3. Middleware:
+        Se define un middleware utilizando appCamper.use(). Este middleware
+        actúa como un intermediario y se ejecutará antes de que se maneje
+        cualquier ruta. En este caso, el middleware simplemente imprime el objeto
+        req (la solicitud) en la consola y luego llama a next() para permitir que el
+        enrutador continúe manejando la solicitud.
+
+        *?4. Definición de las rutas:
+        Se definen tres rutas en el enrutador:
+        - GET /: Responde con el texto "GET ".
+        - GET /:id: Responde con el texto "GET " seguido del valor del
+        -arámetro id de la solicitud.
+        - POST /: Responde con el texto "POST".
+
+        *?5. Exportación del enrutador:
+        El enrutador appCamper se exporta utilizando export default. Esto permite
+        utilizar este enrutador en otros archivos de la aplicación que lo importen
+
+        *!2.2. Que son las variables de entorno ‘dotenv’
+
+        Las variables de entorno en Node.js son variables específicas del entorno en el
+        que se ejecuta una aplicación. Son valores que se pueden configurar
+        externamente al código y se utilizan para almacenar información sensible,
+        configuraciones personalizadas u otros datos relevantes para la aplicación.
+
+        En Node.js, las variables de entorno se pueden acceder utilizando el objeto
+        process.env. Este objeto proporciona acceso a todas las variables de entorno
+        definidas en el sistema operativo donde se está ejecutando la aplicación.
+        https://github.com/motdotla/dotenv
+
+        *!2.2.1. Caracteristicas
+
+        Configuración de la aplicación: Puedes utilizar variables de entorno para
+        almacenar valores de configuración, como credenciales de bases de datos, claves
+        de API, URL de servicios externos, etc. Esto permite mantener esta información
+        sensible separada del código fuente y facilita la configuración de la aplicación en
+        diferentes entornos (desarrollo, producción, pruebas, etc.).
+
+        Parámetros personalizables: Puedes utilizar variables de entorno para permitir la
+        personalización de ciertos comportamientos de la aplicación. Por ejemplo, podrías
+        tener una variable de entorno que determine el número de elementos a mostrar
+        por página en una paginación, o el idioma predeterminado a utilizar.
+
+        Depuración y registro: Las variables de entorno también pueden ser útiles para
+        habilitar o deshabilitar la depuración o el registro de la aplicación en función de la
+        configuración del entorno. Esto permite tener un mayor control sobre los mensajes
+        de registro o habilitar características adicionales de depuración en entornos de
+        desarrollo o pruebas.
+
+        *!2.2.2. instalación de dotenv para ‘Windows y Linux’
+
+        1. Asegúrate de estar ubicado en la raíz de tu proyecto de Node.js en la línea
+        de comandos.
+        2. Ejecuta el siguiente comando para instalar dotenv: ‘npm i -E -D dotenv’
+
+        *!2.2.3. configuración de dotenv con express
+
+        Esta línea de código carga las variable de entorno definidas en el archivo
+        .env en process.env, lo que permite acceder a ellas posteriormente.
+
+        Se obtiene la configuración del servidor desde la variable de entorno
+        MY_CONFIG, que se supone contiene una cadena JSON. La cadena se
+        analiza y se convierte en un objeto JavaScript utilizando JSON.parse(), y
+        se guarda en la variable config.
+
+        Se define una ruta GET para la ruta /campus. Cuando se accede a esta
+        ruta, se envía la respuesta "Campers :)".
+
+        *!2.3. Conexión a MySQL usando ‘mysql2’
+
+        mysql2 es un paquete de Node.js que proporciona una interfaz para interactuar
+        con bases de datos MySQL. Es una biblioteca de cliente MySQL para Node.js que
+        se basa en el paquete mysql original pero con varias mejoras y optimizaciones.
+
+        mysql2 ofrece un rendimiento superior en comparación con mysql, especialmente
+        en escenarios con altas cargas de trabajo y consultas concurrentes. Utiliza la
+        biblioteca C++ libmysqlclient para comunicarse directamente con el servidor
+        MySQL, lo que permite una mayor eficiencia y velocidad.
+        https://github.com/sidorares/node-mysql2
+
+        *!2.3.1. Características
+
+        Rendimiento mejorado: mysql2 ha sido diseñado para proporcionar un
+        rendimiento superior y un menor uso de recursos en comparación con mysql. Esto
+        se logra mediante el uso de conexiones de socket TCP/IP más eficientes y un
+        mejor manejo de la memoria.
+
+        Soporte para consultas preparadas: mysql2 permite utilizar consultas
+        preparadas, lo que puede mejorar la seguridad y el rendimiento al ejecutar
+        consultas repetidas con diferentes parámetros.
+
+        Manejo de resultados de consultas mejorado: mysql2 proporciona un manejo
+        mejorado de los resultados de las consultas, lo que permite un procesamiento más
+        eficiente de grandes conjuntos de resultados.
+
+        Compatibilidad con las últimas características de MySQL: mysql2 se mantiene
+        actualizado con las últimas características y mejoras introducidas en MySQL.
+        Streams: mysql2 admite el uso de streams para la recuperación de resultados de
+        consultas grandes. Esto significa que puedes leer y procesar los resultados en
+        tiempo real a medida que se recuperan del servidor de MySQL, en lugar de
+        esperar a que se complete toda la consulta.
+
+        Compatibilidad con promesas: A diferencia de mysql, mysql2 proporciona una
+        API basada en promesas, lo que facilita el manejo de consultas asincrónicas y
+        mejora la legibilidad del código.
+
+        Pooling de conexiones mejorado: mysql2 ofrece un sistema de pooling de
+        conexiones más avanzado que mysql. El pooling de conexiones es útil para
+        administrar un grupo de conexiones a la base de datos y reutilizarlas de manera
+        eficiente para consultas sucesivas.
+
+        Soporte para autenticación segura: mysql2 admite la autenticación segura con
+        el servidor de MySQL utilizando los métodos de autenticación más recientes, como
+        la autenticación de enchufe de autenticación (caching_sha2_password).
+        Compatibilidad con múltiples consultas: mysql2 permite ejecutar varias
+        consultas en una sola llamada, lo que puede mejorar la eficiencia al reducir la
+        latencia de la red.
+
+        Enlace nativo opcional: mysql2 ofrece la opción de utilizar un enlace nativo
+        opcional para mejorar aún más el rendimiento. Este enlace nativo utiliza la
+        biblioteca C mysqlclient en lugar de libmysqlclient, lo que puede brindar una
+        mejora de rendimiento adicional.
+
+        *!2.3.2. Instalación de mysql2 para ‘Windows y Linux’
+
+        1. Abre una terminal o línea de comandos y navega hasta la ubicación de tu
+        proyecto.
+        2. Ejecuta el siguiente comando para instalar ‘npm i -E -D mysql2’
+
+        *!2.3.3. SELECT
+
+        SELECT * FROM ciudad;
+
+        *!2.3.4. INSERT INTO
+
+        INSERT INTO ciudad(nombre) VALUES("bucaramanga");
+
+        *!2.3.5. UPDATE
+
+        UPDATE ciudad SET nombre = "medellin" WHERE id_ciudad = 1;
+
+        *!2.3.6. DELETE
+
+        DELETE FROM ciudad WHERE id = 1;
+
+        *!3. Node JS Avanzado
+
+        *!3.1 Que es nanoid
+
+        NanoID es una biblioteca de generación de identificadores únicos y aleatorios en
+        Node.js. Proporciona una forma sencilla de generar identificadores únicos que
+        pueden ser utilizados, por ejemplo, como claves primarias en bases de datos,
+        identificadores de objetos, tokens de autenticación, entre otros casos de uso.
+
+        La biblioteca NanoID está diseñada para ser rápida, compacta y segura,
+        generando identificadores únicos de forma eficiente. Utiliza una combinación de
+        caracteres alfanuméricos y se puede configurar para generar identificadores con
+        diferentes longitudes y utilizando diferentes alfabetos. https://github.com/ai/nanoid
+
+        *?3.1.1 Características
+
+        Generación de identificadores únicos: NanoID está diseñado específicamente
+        para generar identificadores únicos de manera eficiente. Utiliza algoritmos
+        criptográficamente seguros para garantizar que los identificadores generados sean
+        altamente improbables de repetirse.
+
+        Tamaño configurable: Puedes especificar la longitud deseada del identificador
+        generado mediante el parámetro de longitud de la función nanoid(). Esto te
+        permite ajustar el tamaño del identificador según tus necesidades específicas.
+
+        Alfabeto personalizable: NanoID utiliza un conjunto de caracteres alfanuméricos
+        por defecto (a-z, A-Z y 0-9). Sin embargo, también puedes personalizar el alfabeto
+        utilizado para generar los identificadores. Esto te permite, por ejemplo, utilizar solo
+        caracteres en minúscula o añadir caracteres adicionales según tus preferencias.
+
+        Rendimiento eficiente: NanoID está diseñado para ser rápido y eficiente en
+        términos de rendimiento. Los algoritmos utilizados se optimizan para generar
+        identificadores únicos de manera rápida, lo que es especialmente importante
+        cuando se necesitan generar grandes cantidades de identificadores en poco
+        tiempo.
+
+        Tamaño compacto: La biblioteca NanoID es relativamente pequeña y liviana, lo
+        que significa que no añade una carga significativa a tus aplicaciones Node.js. Esto
+        es especialmente beneficioso si estás trabajando en entornos con restricciones de
+        recursos
+
+        *!3.1.2. Instalación de nanoid para ‘Windows y Linux’
+
+        1. Abre una terminal o línea de comandos en el directorio raíz de tu proyecto.
+        2. Ejecuta el siguiente comando para instalar nanoID a través de npm (Node
+        Package Manager): npm i -E -D nanoid
+
+        *!3.2 Que son las cookies
+
+        las cookies son pequeños fragmentos de información que se almacenan en el lado
+        del cliente (generalmente en el navegador) y se utilizan para realizar un
+        seguimiento de la información relacionada con la sesión del usuario o para
+        almacenar preferencias específicas.
+
+        Cuando un cliente realiza una solicitud a un servidor Node.js, puede enviar una
+        cookie junto con la solicitud. El servidor puede leer esa cookie y utilizar la
+        información almacenada en ella para realizar acciones específicas o personalizar
+        la respuesta.
+
+        *!3.2.1. Que es cookie-parse
+
+        es un middleware popular en Node.js que se utiliza para analizar y manejar
+        cookies en las solicitudes HTTP. Proporciona una forma conveniente de leer y
+        manipular las cookies enviadas por el cliente. https://github.com/expressjs/cookieparser
+
+        *?3.2.2. Caracteristicas
+
+        Análisis de cookies: cookie-parser analiza automáticamente las cookies
+        presentes en las solicitudes entrantes y las convierte en un objeto JavaScript
+        accesible en las rutas de tu aplicación.
+
+        Acceso sencillo: Una vez que cookie-parser ha analizado las cookies,
+        proporciona acceso sencillo a ellas a través de la propiedad req.cookies del objeto
+        request (req) en Express. Puedes leer los valores de las cookies y utilizarlos en tus
+        manejadores de rutas.
+
+        Soporte para firmado de cookies: cookie-parser también admite la firma de
+        cookies utilizando una clave secreta. Puedes especificar una clave al configurar
+        cookie-parser para que las cookies se firmen automáticamente y se verifiquen
+        cuando sean recibidas.
+
+        Configuración de opciones: Puedes personalizar el comportamiento de cookieparser configurando diversas opciones. Algunas opciones comunes incluyen la
+        configuración de las opciones de firma, la duración de las cookies, la ruta de
+        acceso, el dominio, etc.
+
+        Establecimiento de cookies: Además de analizar las cookies entrantes, cookieparser te permite establecer fácilmente nuevas cookies en las respuestas salientes
+        utilizando el método res.cookie() en Express. Esto simplifica el proceso de
+        establecer y enviar cookies al cliente.
+
+        Middleware de alto rendimiento: cookie-parser está diseñado para ser un
+        middleware de alto rendimiento que procesa eficientemente las cookies en las
+        solicitudes entrantes. Puede manejar múltiples cookies y realizar las tareas de
+        análisis y manipulación de cookies de manera eficaz.
+
+        *!3.2.3. Instalación de cookie-parser para ‘Windows y Linux’
+
+        1. Inicia un nuevo proyecto Node.js o ve al directorio de tu proyecto existente
+        desde la línea de comandos.
+        2. Ejecuta el siguiente comando para instalar cookie-parser utilizando el gestor
+        de paquetes npm npm i -E -D cookie-parser
+
+        *!3.3 Que es DTO
+
+        DTO significa Data Transfer Object (Objeto de Transferencia de Datos). Es un
+        patrón de diseño que se utiliza en la programación de software, especialmente en
+        arquitecturas de varias capas, donde se necesita transferir datos entre capas o
+        componentes del software.
+
+        Un DTO es esencialmente un objeto simple, a menudo sin lógica de negocio, que
+        contiene solo campos y métodos de acceso (getters y setters). Su objetivo
+        principal es encapsular los datos y permitir su transporte de un sistema a otro de
+        manera eficiente. Se utilizan para serializar los datos que deben enviarse a través
+        de la red, lo que puede ser costoso en términos de recursos de tiempo y CPU.
+        https://github.com/typestack/class-transformer
+
+        *?3.3.2. Características
+
+        Simplicidad: Un DTO es un objeto simple que contiene atributos y métodos para
+        acceder y modificar estos atributos (getters y setters). No contiene lógica
+        empresarial ni comportamientos complejos.
+
+        Eficiencia: Los DTOs son utilizados para agrupar y transferir múltiples datos en
+        una sola llamada de red o entre componentes de un sistema, lo que puede reducir
+        la sobrecarga de la red y aumentar la eficiencia.
+
+        Encapsulación: Encapsulan los datos que necesitan ser transferidos entre
+        procesos o entre la red, asegurándose de que los datos internos del objeto no
+        sean expuestos directamente.
+
+        Serialización: Los DTOs se pueden serializar en varios formatos como XML,
+        JSON, etc., lo que permite una fácil transferencia de datos a través de la red.
+        Estructurados según las necesidades del cliente: A diferencia de los objetos de
+        dominio que están estructurados según las necesidades de la lógica empresarial,
+        los DTOs se estructuran según las necesidades del cliente que recibe los datos.
+        Esto significa que puedes tener varios DTOs para el mismo objeto de dominio,
+        cada uno optimizado para diferentes vistas o diferentes consumidores de los
+        datos.
+
+        Reducen la acoplamiento: Debido a que los DTOs se utilizan para transferir
+        datos entre capas o componentes, ayudan a reducir el acoplamiento entre estos
+        componentes. Esto significa que los cambios en un componente no necesitan
+        propagarse a otros componentes siempre y cuando el DTO se mantenga
+        constante.
+
+        *!3.3.3. Que es class-transformer
+
+        class-transformer es una biblioteca en Node.js que permite transformar objetos
+        de tipo "plano" o JSON en instancias de clases y viceversa. Esta librería es muy
+        útil en conjunción con el patrón Data Transfer Object (DTO), en donde los DTOs a
+        menudo se crean como clases.
+
+        La biblioteca ofrece un conjunto de funciones útiles, como:
+
+        classToPlain: Convierte la instancia de una clase a un objeto plano.
+
+        plainToClass: Convierte un objeto plano a una instancia de una clase específica.
+
+        classToClass: Crea una nueva copia de la instancia de una clase.
+
+        classToClassFromExist: Crea una nueva copia de la instancia de una clase,
+        manteniendo los valores existentes en la instancia objetivo.
+
+        Además, la biblioteca class-transformer permite controlar más a fondo el proceso
+        de transformación utilizando decoradores, lo que te permite especificar cómo se
+        deben manejar ciertos campos durante la transformación.
+
+        Por ejemplo, puedes excluir ciertos campos de la transformación, cambiar el
+        nombre de un campo, transformar el valor de un campo (por ejemplo, convertir
+        una cadena en un número), y mucho más.
+
+        Esta biblioteca es especialmente útil cuando se trabaja con marcos como
+        Express.js y se utiliza junto con la biblioteca class-validator para la validación del
+        lado del servidor en aplicaciones Node.js.
+
+        *!3.3.4. Instalación de class-transformer para ‘Windows y Linux’
+
+        Para instalar class-transformer en un sistema Linux con Node.js, necesitarás
+        usar npm (el administrador de paquetes de Node.js). Abre una terminal y escribe
+        los siguientes comandos:
+        “npm i -E -D class-transformer”
+        “npm i -E -D reflect-metadata”: https://github.com/rbuckton/reflect-metadata
+        “npm i -E -D class-validator”: https://github.com/typestack/class-validator
+        “npm i -E -D typescript”
+
+        Una vez que tienes TypeScript instalado, puedes iniciar un archivo tsconfig.json
+        usando el siguiente comando en la raíz de tu proyecto: “npx tsc --init”
+
+        Esto creará un archivo tsconfig.json en tu directorio de proyecto con una
+        configuración predeterminada. Puedes modificar este archivo según las
+        necesidades de tu proyecto.
+
+        Ajustaremos la configuración por defecto proporcionada por el comando anterior.
+        En el archivo tsconfig.json, estableceremos una configuración que sea
+        compatible con las dependencias "class-transformer" y "reflect-metadata".
+
+        En el archivo package.json, organizaremos el proceso para convertir el código
+        TypeScript a JavaScript utilizando el comando 'tsc'. Este proceso se realizará de
+        forma independiente de 'nodemon
+
+        *!3.4 Que es JWT ‘JSON Web Token’
+
+        *!3.4.1. Introducción
+
+        JWT (JSON Web Token) es un estándar abierto (RFC 7519) que define una forma
+        compacta y autónoma de transmitir información entre dos partes en forma de
+        objeto JSON. Es comúnmente utilizado para autenticar usuarios y garantizar la
+        integridad de la información entre un cliente (generalmente un navegador web) y
+        un servidor o servicio.
+
+        Un JWT consta de tres partes separadas por puntos ('.'): el encabezado, los datos
+        o carga útil (payload) y una firma. La estructura general de un JWT es la siguiente:
+        xxxxx.yyyyy.zzzzz
+
+        xxxxx: Encabezado (Header) codificado en Base64url, que contiene información
+        sobre el algoritmo de firma y el tipo de token.
+
+        yyyyy: Datos o carga útil (Payload) codificado en Base64url, que contiene los
+        datos que se desean transmitir entre las partes. Puede incluir información como el
+        identificador del usuario, roles, permisos, etc.
+
+        zzzzz: Firma digital que asegura que el token no ha sido modificado en el camino y
+        puede ser verificado por el servidor. La firma se genera utilizando el encabezado
+        codificado, la carga útil codificada, una clave secreta (en el caso de JWT con
+        cifrado HMAC) o una clave pública/privada (en el caso de JWT con cifrado RSA).
+        Los JWT son ampliamente utilizados en aplicaciones web y API RESTful como
+        mecanismo de autenticación y autorización, ya que son compactos, seguros y
+        autocontenido. Almacenar la información relevante en el token permite que los
+        servidores no necesiten mantener un estado de sesión, lo que facilita la
+        escalabilidad y la distribución del sistema.
+
+        Es importante tener en cuenta que, debido a que el contenido de un JWT está
+        codificado en Base64url y no cifrado, cualquier persona que tenga acceso al token
+        puede leer su contenido. Por lo tanto, es esencial no almacenar información
+        sensible como contraseñas en el token y utilizar siempre una conexión segura
+        (HTTPS) para transmitir los tokens entre el cliente y el servidor. https://jwt.io/
+
+        *!3.4.1. Que es “jose”
+
+        En el contexto de npm, "jose" es una librería que proporciona funcionalidades
+        relacionadas con JSON Object Signing and Encryption (JOSE). JOSE es un
+        conjunto de especificaciones que define métodos para firmar y cifrar objetos
+        JSON, que a su vez se utilizan para crear y validar JSON Web Tokens (JWT).
+
+        La librería "jose" de npm permite trabajar con tokens JWT de una manera más
+        sencilla y segura, ya que proporciona métodos para generar firmas digitales (JWS
+        - JSON Web Signature) y cifrado (JWE - JSON Web Encryption), además de
+        permitir verificar la autenticidad de los tokens y desencriptarlos.
+
+        Algunas de las funcionalidades que ofrece la librería "jose" incluyen:
+        *? Generar y verificar tokens JWT firmados.
+        *? Generar y verificar tokens JWT cifrados.
+        *? Soporte para múltiples algoritmos de firma y cifrado, como RS256, S256, ES256, entre otros.
+        *? Manipulación de claves públicas y privadas para la firma y el cifrado.
+        *? Creación y verificación de claves JSON Web Key (JWK).
+
+        Esta librería puede ser útil para implementar autenticación y autorización en
+        aplicaciones web y servicios que utilicen tokens JWT, ya que simplifica el proceso
+        de generación y validación de estos tokens. Es importante utilizar la librería "jose"
+        con precaución y siguiendo buenas prácticas de seguridad para garantizar la
+        integridad y la confidencialidad de los tokens utilizados en la aplicación.
+
+        *!3.4.2. Instalación de jose para ‘Windows y Linux’
+        
+        1. Abre una terminal o línea de comandos en tu sistema operativo.
+        2. Navega hasta el directorio de tu proyecto o donde desees instalar la librería
+        "jose".
+        3. Ejecuta el siguiente comando para instalar "jose" desde npm: “npm i -E -
+        D jose”
+
  */
